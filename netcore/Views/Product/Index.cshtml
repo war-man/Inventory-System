@@ -1,0 +1,147 @@
+﻿@model IEnumerable<netcore.Models.Invent.Product>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_AdminlteNetcoreIndex.cshtml";
+    ViewData["EntityIcon"] = "fa fa-tags";
+    ViewData["ListTitle"] = "Product Inventory List";
+    ViewData["IndexInfo"] = "Product is both Isabella's Clearly Products, Supplies and Ingredients.";
+}
+
+<div class="box-tools pull-right">
+    <label class="control-label label-default" style="right">Show/Hide Active Products:</label> <input type="checkbox" onclick="handleClick(this)" name="ckActive" checked="checked" />
+</div>
+<table class="table table-hover table-striped" style="width:100%">
+    <thead>
+        <tr>
+            <th></th>
+            <th title="Ingredient, Shipping, etc">
+                @Html.DisplayNameFor(model => model.productType)
+            </th>
+            <th title="Active/InActive">
+                @Html.DisplayNameFor(model => model.productStatus)
+            </th>
+            <th title="Vendor or Clearly sku Number">
+                @Html.DisplayNameFor(model => model.productCode)
+            </th>
+            <th title="Full Product Title">
+                @Html.DisplayNameFor(model => model.productName)
+            </th>
+            <th title="Product Description">
+                @Html.DisplayNameFor(model => model.description)
+            </th>
+            <th title="Clearly Barcode">
+                @Html.DisplayNameFor(model => model.barcode)
+            </th>
+            <th title="Measuring Unit">
+                @Html.DisplayNameFor(model => model.uom)
+            </th>
+            <th title="Quantity on hand">
+                @Html.DisplayNameFor(model => model.Qty)
+            </th>
+            <th title="Minimum Quantity Needed in Warehouse. Used to Flag Ordering">
+                @Html.DisplayNameFor(model => model.minQuantity)
+            </th>
+            <th title="Need to Order?">
+                @Html.DisplayNameFor(model => model.flag)
+            </th>
+            <th class="hidden">
+                @Html.DisplayNameFor(model => model.serialNumber)
+            </th>
+            <th title="Link to Product Page">
+                @Html.DisplayNameFor(model => model.link)
+            </th>
+            <th class="hidden" title="Notes">
+                @Html.DisplayNameFor(model => model.notes)
+            </th>
+        </tr>
+    </thead>
+
+
+    <tbody>
+        @foreach (var item in Model)
+        {
+            @*if (active)
+                {
+                    < p > Checked </ p >
+                }*@
+
+
+
+
+        <tr>
+            <td>
+                <div class="tools">
+                    <a asp-action="Edit" asp-route-id="@item.productId" class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></a>
+                    <a asp-action="Details" asp-route-id="@item.productId" class="btn btn-primary btn-xs"><i class="fa fa-list"></i></a>
+                    <a asp-action="Delete" asp-route-id="@item.productId" class="btn btn-danger btn-xs"><i class="fa fa-trash"></i></a>
+                    <!--<text contenteditable="true">Editable text here</text>-->
+                </div>
+
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.productType)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.productStatus)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.productCode)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.productName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.barcode)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.uom)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Qty)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.minQuantity)
+            </td>
+            <td>
+                @if (item.Qty < item.minQuantity)
+                {
+                    item.flag = true;
+                    @*Html.DisplayFor(modelItem => item.flag)*@
+                    <i class="fa fa-flag-checkered" style="color:red"></i>
+                }
+                else
+                {
+                    item.flag = false;
+                    @*Html.DisplayFor(modelItem => item.flag)
+                <i class="fa fa-flag-o"></i>*@
+                }
+
+            </td>
+            <td class="hidden">
+                @Html.DisplayFor(modelItem => item.serialNumber)
+            </td>
+            <td>
+                <a target="_blank" href=@Html.DisplayFor(modelItem => item.link)>link</a>
+            </td>
+            <td class="hidden">
+                @Html.DisplayFor(modelItem => item.notes)
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>
+
+
+<script>
+    function handleClick(cb) {
+        //var chk = cb.value;
+        //alert(chk.values);
+        //alert(cb.value);
+        //use this value
+        @*Html.CheckBoxFor(value);*@
+    }
+</script>

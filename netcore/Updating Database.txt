@@ -1,0 +1,4 @@
+﻿Open the Package Manager Console Window and execute the following
+
+PM> Add-Migration [migration name]
+PM> Update-Database
